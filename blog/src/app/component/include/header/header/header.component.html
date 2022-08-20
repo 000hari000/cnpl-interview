@@ -1,0 +1,17 @@
+<ul class="nav justify-content-end bg-info headMenu">
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="['/home']" aria-current="page" href="#">Home</a>
+    </li>
+    <li class="nav-item" *ngIf="!isLog">
+      <a class="nav-link" [routerLink]="['/signup']" href="#">Sign Up</a>
+    </li>
+    <li class="nav-item" *ngIf="!isLog">
+      <a class="nav-link" [routerLink]="['/login']" href="#">Login</a>
+    </li>
+    <li class="nav-item" *ngIf="isLog">
+      <a class="nav-link" [routerLink]="['/my-blog']" href="#" tabindex="-1" aria-disabled="true">My Blog</a>
+    </li>
+    <li class="nav-item" *ngIf="isLog">
+        <a class="nav-link" (click)="make_logout()" href="#" tabindex="-1" aria-disabled="true">Logout</a>
+    </li>
+</ul>

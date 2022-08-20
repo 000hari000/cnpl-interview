@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-12 text-right mb-2">
+            <button type="button" class="btn btn-info btn-sm" (click)="add_form()">ADD</button>
+        </div>
+        <ng-template [ngIf]="blogList.length > 0">
+            <div class="col-md-12 bg-light mb-2" *ngFor="let p of blogList">
+                <h3>
+                    {{p.blogTitle}} 
+                    &nbsp;&nbsp;<button type="button" class="btn btn-success btn-sm" (click)="edit_form(p.blogId)">Edit</button>
+                    &nbsp;&nbsp;<button type="button" class="btn btn-danger btn-sm" (click)="delete_form(p.blogId)">Delete</button>
+                </h3>
+                <h5>{{p.blogSubTitle}}</h5>
+                <p>{{p.description}}</p>
+                <p><b>Tags</b>{{p.tags}}</p>
+                <p><b>Added At</b> {{format_data(p.aDate)}}</p>
+            </div>
+        </ng-template>
+    </div>
+</div>
+<!--add edit -->
+<ng-template #manageBlog let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{title}}!</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="blogForm" (submit)="saveData()">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" placeholder="Enter Title" class="form-control" autocomplete="off" formControlName="blogTitle">
+                <span class="errMsg" *ngIf="inp_group('blogTitle').touched && inp_group('blogTitle').hasError('required')">Email is required</span>
+                <span class="errMsg" *ngIf="inp_group('blogTitle').touched && inp_group('blogTitle').hasError('maxlength')">Max Lenght is 20</span>
+            </div>
+            <div class="form-group">
+                <label>Sub Title</label>
+                <input type="text" placeholder="Enter Sub Title" class="form-control" autocomplete="off" formControlName="blogSubTitle">
+                <span class="errMsg" *ngIf="inp_group('blogSubTitle').touched && inp_group('blogSubTitle').hasError('required')">Email is required</span>
+                <span class="errMsg" *ngIf="inp_group('blogSubTitle').touched && inp_group('blogSubTitle').hasError('maxlength')">Max Lenght is 50</span>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea rows="3" placeholder="Enter Description" class="form-control" autocomplete="off" formControlName="description"></textarea>
+                <span class="errMsg" *ngIf="inp_group('description').touched && inp_group('description').hasError('required')">Email is required</span>
+                <span class="errMsg" *ngIf="inp_group('description').touched && inp_group('description').hasError('maxlength')">Max Lenght is 250</span>
+            </div>
+            <div class="form-group">
+                <label>Tags</label>
+                <textarea rows="3" placeholder="Enter Tags" class="form-control" autocomplete="off" formControlName="tags"></textarea>
+                <span>Note - use comma to split a tags (eg:- fun,telivision)</span>
+            </div>
+            <div class="form-group text-center mt-2">
+                <button type="submit" class="btn btn-info btn-sm" [disabled]="blogForm.invalid || saved">SAVE</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

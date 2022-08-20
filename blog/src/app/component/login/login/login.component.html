@@ -1,0 +1,28 @@
+<app-header></app-header>
+<div class="container mt-2">
+    <div class="row bg-light p-2">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h3 class="bg-info text-center">LOGIN HERE</h3>
+            <form [formGroup]="signUpForm" (submit)="signUp()" > 
+                <div class="form-group">
+                    <label>User Email</label>
+                    <input type="text" placeholder="Enter Email" class="form-control" autocomplete="off" formControlName="userEmail">
+                    <span class="errMsg" *ngIf="inp_group('userEmail').touched && inp_group('userEmail').hasError('required')">Email is required</span>
+                    <span class="errMsg" *ngIf="inp_group('userEmail').touched && inp_group('userEmail').hasError('email')">Invalid email</span>
+                </div>
+                <div class="form-group">
+                    <label>User Password</label>
+                    <input type="text" placeholder="Enter Password" class="form-control" autocomplete="off" formControlName="userPassword">
+                    <span class="errMsg" *ngIf="inp_group('userPassword').touched && inp_group('userPassword').hasError('required')">Password is required</span>
+                </div>
+                <p class="errMsg mt-2 text-center mb-2">{{msg}}</p>
+                <div class="form-group text-center mt-2">
+                    <button type="submit" class="btn btn-info btn-sm" [disabled]="signUpForm.invalid || saved">LOGIN NOW</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="container mt-2">
+    <div *ngIf="tagList.length > 0" class="row">
+        <div  *ngFor="let p of tagList;let i=index;" (click)="get_by_tag(i)" class="col-md-1 tagss">
+            {{p.tagName}} 
+            <div *ngIf="p.status != '00'" class="dot"></div>
+        </div>
+    </div>
+    <div class="row">
+        <ng-template [ngIf]="blogList.length > 0">
+            <div class="col-md-12 bg-light mb-2" *ngFor="let p of blogList">
+                <h3>{{p.blogTitle}}</h3>
+                <h5>{{p.blogSubTitle}}</h5>
+                <p>{{p.description}}</p>
+                <p><b>Tags</b>{{p.tags}}</p>
+                <p><b>Added By</b> {{p.userName}}</p>
+                <p><b>Added At</b> {{format_data(p.aDate)}}</p>
+            </div>
+        </ng-template>
+    </div>
+</div>
